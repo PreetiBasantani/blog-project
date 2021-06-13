@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+{% block title %} ARYAN from CANADA {% endblock %}
+
+{% block content %}
+  <div class="sub_container">
+    <form method="POST">
+      {% csrf_token %}
+      <h2>Are you sure, You want to delete this post? </h2>
+      <input type="submit" value="Delete Post">
+    </form>
+  </div>
+{% endblock %}

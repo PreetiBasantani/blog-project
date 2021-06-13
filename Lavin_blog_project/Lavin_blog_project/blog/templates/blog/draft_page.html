@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+{% block title %} ARYAN from CANADA {% endblock %}
+
+{% block content %}
+  {% for e in draft_list %}
+    <div class="sub_container">
+        <div class="img_container">
+            <a href="{% url 'blog:post_detail' e.pk  %}">
+                <img src="{{ e.post_image.url }}" alt="Can't load img">
+            </a>
+        </div>
+
+      <div class="lower">{{ e.category}}  </div>
+
+      <p class="title"> {{ e.post_title }}</p>
+        <span><i class="material-icons">edit</i> <a href="{% url 'blog:update_post' pk=e.pk %}">Edit</a> </span>
+         <span><i class="material-icons">delete</i> <a href="{% url 'blog:delete_post' pk=e.pk %}">Delete</a></span>
+         <span><i class="material-icons">publish</i> <a href="{% url 'blog:publish_post' pk=e.pk %}">Publish Post</a></span>
+
+    </div>
+  {% endfor %}
+
+{% endblock %}

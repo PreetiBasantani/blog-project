@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+{% block title %} ARYAN from CANADA {% endblock %}
+
+{% block content %}
+
+
+    <div class="sub_container">
+        <div class="img_container">
+            <img src="{{ post.post_image.url }}" alt="Can't load img">
+        </div>
+        <p id="title">{{ post.post_title }}</p>
+        <p id="text">{{ post.text|urlize|linebreaksbr }}</p>
+
+        <div id="sub-container">
+            <h3>Comments:</h3>
+            <form action="{% url 'blog:add_comments' pk=post.pk %}" method="post">
+                {% csrf_token %}
+                   {{ form.as_p}}
+                <input id="sub_button_right" type="submit" value="Submit" >
+            </form>
+                <div class="comments-container">
+                {% for comment_entry in post.approve_comments %}
+                    <i class="material-icons" style="font-size:35px"> person </i> <span>{{ comment_entry.author }}</span> <span id="left-align"><strong>Created on: </strong>{{ comment_entry.create_date }}</span>
+                    <p>{{ comment_entry.comment_text }}</p>
+                    <br>
+                {% endfor %}
+                </div>
+
+         </div>
+
+    </div>
+
+
+
+
+
+
+{% endblock %}

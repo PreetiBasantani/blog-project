@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous">
+
+    </script>
+     <script src="{% static 'js/script.js' %}" type="text/javascript"> </script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Mate+SC&family=Open+Sans&display=swap" rel="stylesheet">  <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+  <div class="nav_container">
+
+
+      <div class="logged" >
+          {% if user.is_authenticated  %}
+              <p class="log">Welcome {{ user.username }} |  {{ user.groups.all.0 }} | Last Login: {{ user.last_login }}</p>
+              <p class="log"><a  href="{% url 'logout' %}">LogOUT</a></p>
+
+                {% ifequal  user.groups.all.0.name 'Admin' %}
+                    <p class="log"><a href="{% url 'blog:create_post' %}">New Post</a> <a href="{% url 'blog:drafts' %}">Draft</a></p>
+                {% endifequal %}
+          {% else %}
+              <p id="logged"><a  href="{% url 'login' %}">Login</a></p>
+          {% endif %}
+      </div>
+
+      <h1> My Life Journey </h1>
+    <nav>
+      <a id="a1" href="{% url 'blog:post_list' %}">All</a>
+      <a id="a2" href="{% url 'blog:post_category_list' category='Lifestyle' %}">Lifestyle</a>
+      <a id="a3" href="{% url 'blog:post_category_list' category='Health' %}">Health</a>
+      <a id="a4" href="{% url 'blog:post_category_list' category='Recipes' %}">Recipes</a>
+      <a id="a5" href="{% url 'blog:post_category_list' category='Travel' %}">Travel</a>
+
+      <a id="a6" href="{% url 'blog:post_category_list' category='Music' %}">Music</a>
+      <a id="a7" href="{% url 'blog:post_category_list' category='Products' %}">Products</a>
+      <a id="a8" href="{% url 'blog:about_info' %}">Info</a>
+    </nav>
+
+
+
+  </div>
+    <div class="base_container">
+         {% block content %}
+        {% endblock %}
+    </div>
+
+
+
+</body>
+
+</html>

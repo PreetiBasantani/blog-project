@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+{% block title %} ARYAN from CANADA {% endblock %}
+
+{% block content %}
+  {% for e in post_list %}
+    <div id="d{{ forloop.counter }}">
+      <a href="{% url 'blog:post_detail' e.pk  %}">
+        <img src="{{ e.post_image.url }}" alt="Can't load img">
+      </a>
+      <div class="lower">{{ e.category}}  </div>
+
+      <p class="title"> {{ e.post_title }}</p>
+      </div>
+
+  {% endfor %}
+{% endblock %}
